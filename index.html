@@ -5,7 +5,16 @@
 <link rel="stylesheet" href="css/game.css">
 
 <body>
-  <script>
-    runGame(GAME_LEVELS, DOMDisplay);
-  </script>
+	<SCRIPT language="JavaScript"> 
+		var url = window.location.href;
+		var username = url.split("?")[1].split("&")[0].split("=")[1];
+		document.write("Hello ");
+        document.write(username); 
+    </SCRIPT> 
+    <form action="Score.html" method="get">
+	  <input type="submit" value="Score" />
+	</form>
+    <script>
+		runGame(GAME_LEVELS, DOMDisplay,username);
+    </script>
 </body>
