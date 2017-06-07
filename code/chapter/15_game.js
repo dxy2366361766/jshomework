@@ -10,6 +10,7 @@ var simpleLevelPlan = [
   "                      "
 ];
 
+var number=0;
 function Level(plan) {
   this.width = plan[0].length;
   this.height = plan.length;
@@ -284,6 +285,7 @@ Level.prototype.playerTouched = function(type, actor) {
     this.status = "lost";
     this.finishDelay = 1;
   } else if (type == "coin") {
+	  number++;
     this.actors = this.actors.filter(function(other) {
       return other != actor;
     });
@@ -343,11 +345,32 @@ function runLevel(level, Display, andThen) {
   });
 }
 
-function runGame(plans, Display) {
+var name;
+var shuju;
+var s;
+function runGame(plans, Display,username) {
+	name=username;
   function startLevel(n) {
     runLevel(new Level(plans[n]), Display, function(status) {
-      if (status == "lost")
-        startLevel(n);
+      if (status == "lost"){  
+		 shuju = new Array();
+		 for(var ii=0;ii<localStorage.length;ii++){
+			if(localStorage.key(ii)=="paihang")
+				break;
+		 }
+		 if(ii>=localStorage.length){
+			 shuju[0]={name: name, price:n*10+number};		
+			localStorage.setItem("paihang",JSON.stringify(shuju));
+		 }
+		 else{
+			shuju=JSON.parse(localStorage.getItem("paihang"));
+			s=shuju.length;
+			shuju[s]={name: name, price:n*10+number};		
+			localStorage.setItem("paihang",JSON.stringify(shuju));
+		 }
+		 number=0;
+		startLevel(0);
+	  }
       else if (n < plans.length - 1)
         startLevel(n + 1);
       else
@@ -355,4 +378,28 @@ function runGame(plans, Display) {
     });
   }
   startLevel(0);
+}
+function score(){
+	window.location.href="score.html";
+
+
+}
+function loadscore(){
+var temp;
+	sj=JSON.parse(localStorage.getItem("paihang"));
+	for(var i=0;i<sj.length;i++){
+		for(var j=0;j<sj.length-1;j++){
+			if(sj[j+1].price>sj[j].price){
+				temp=sj[j];
+				sj[j]=sj[j+1];
+				sj[j+1]=temp;
+				}
+		}
+	}
+
+	for(var q=0;q<10||sj.length;q++){
+	document.getElementById("table-body").rows[q].cells[1].innerHTML=sj[q].name;
+	document.getElementById("table-body").rows[q].cells[2].innerHTML=sj[q].price;
+
+	}
 }

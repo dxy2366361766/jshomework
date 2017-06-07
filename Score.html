@@ -3,8 +3,103 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>排行榜</title>
+<style type="text/css">
+table.hovertable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.hovertable th {
+	background-color:#c3dde0;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+table.hovertable tr {
+	background-color:#d4e3e5;
+}
+table.hovertable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+</style>
 </head>
-
 <body>
+<script src="code/chapter/15_game.js"></script>
+<script src="code/game_levels.js"></script>
+<div id="content">
+</table>
+    <table id="table1" class="hovertable">
+        <thead>
+            <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                <th>NO</th>
+                <th scope="col" abbr="Medium">name</th>
+                <th scope="col" abbr="Business">score</th>
+            </tr>
+        </thead>
+        <tbody id= "table-body">
+            <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                <th scope="row">1</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                <th scope="row">2</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                <th scope="row">3</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                <th scope="row">4</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                <th scope="row">5</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                <th scope="row">6</th>
+                <td></td>
+                <td></td>
+            </tr>
+			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                <th scope="row">7</th>
+                <td></td>
+                <td></td>
+            </tr>
+			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                <th scope="row">8</th>
+                <td></td>
+                <td></td>
+            </tr>
+			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                <th scope="row">9</th>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript"> 
+window.onload=function(){ 
+loadscore();
+} 
+
+</script> 
+<form action="index.html" method="get">
+  <input type="submit" value="Back" />
+</form>
 </body>
 </html>
