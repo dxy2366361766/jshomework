@@ -5,17 +5,33 @@
 <link rel="stylesheet" href="css/game.css">
 
 <body>
-	<SCRIPT language="JavaScript"> 
-		var url = window.location.href;
-		var username = url.split("?")[1].split("&")[0].split("=")[1];
-		document.write("Hello ");
-        document.write(username); 
-    </SCRIPT> 
-	  <input type="submit" value="Score" onclick="score()"/>
-	  <p>���ؿ���ʱ <span id="mes">10</span> �룬ʱ�䵽����Ϊʧ�ܣ�</p>
+	<SCRIPT language="JavaScript">
+	var str=location.href; //取得整个地址栏
+	var num=str.indexOf("?")
+	str=str.substr(num+1); //取得所有参数   stringvar.substr(start [, length ]
+
+	var arr=str.split("&"); //各个参数放到数组里
+	var num=arr[0].indexOf("=");
+	var username =arr[0].substring(num+1,arr[0].length)
+	//alert(arr[0].substring(num+1,arr[0].length))
+ 	//var name=arr[i].substring(0,num);
+ 	//var value=arr[i].substr(num+1);
+	document.write("Hello ");
+  document.write(username)
+  </SCRIPT>
+		<form action="/score" method="post" >
+	  <input type="submit" value="结束游戏，查看排行榜" onclick="submits()"/>
+		<input type="hidden" name="fraction"  id="fraction">
+		<input type="hidden" name="name" value=username onclick="submit" id="name">
+		</form>
     <script>
 		runGame(GAME_LEVELS, DOMDisplay,username);
     </script>
-
+		<script>
+		function submits() {
+			document.getElementById('fraction').value=localStorage.getItem('fraction');
+			document.getElementById('name').value=username;
+			localStorage.clear();
+		}
+		</script>
 </body>
-

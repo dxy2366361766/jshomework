@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>排行榜</title>
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<style type="text/css">
+table.hovertable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.hovertable th {
+	background-color:#c3dde0;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+table.hovertable tr {
+	background-color:#d4e3e5;
+}
+table.hovertable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+</style>
+</head>
+<body>
+<script src="code/chapter/15_game.js"></script>
+<script src="code/game_levels.js"></script>
+<div id="content">
+</table>
+    <table id="table1" class="hovertable" id="table-result">
+        <thead>
+            <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                <th>NO</th>
+                <th scope="col" abbr="Medium">名称</th>
+                <th scope="col" abbr="Business">分数</th>
+            </tr>
+        </thead>
+        <tbody id= "table-body">
+        </tbody>
+    </table>
+</div>
+
+<form action="/login" method="get">
+  <input type="submit" value="Back" />
+</form>
+</body>
+<script>
+$(document).ready(function(){
+	var tbody=window.document.getElementById("table-body");
+	$.getJSON("/data",function (data) {
+		var item="";
+		$.each(data,function(i,result){
+			item = item+"<tr onmouseover='this.style.backgroundColor='#ffff66';' onmouseout='this.style.backgroundColor='#d4e3e5';'>"
+			                +"<th scope='row'>"+(i+1)+"</th>"
+			                +"<td>"+result.name+"</td>"
+			                +"<td>"+result.data+"</td>"
+			            		+"</tr>"
+		})
+		tbody.innerHTML=item
+	})
+});
+</script>
+</html>
