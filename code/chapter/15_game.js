@@ -345,18 +345,6 @@ function runLevel(level, Display, andThen) {
   });
 }
 
-var i = 10;
-        var intervalid;
-        intervalid = setInterval("fun()", 1000);
-        function fun() {
-            if (i == 0) {
-                startLevel(0);
-                clearInterval(intervalid);
-            }
-            document.getElementById("mes").innerHTML = i;
-            i--;
-        }
-
 var name;
 var shuju;
 var s;
@@ -364,25 +352,19 @@ function runGame(plans, Display,username) {
 	name=username;
   function startLevel(n) {
     runLevel(new Level(plans[n]), Display, function(status) {
-      if (status == "lost"){  
-		 shuju = new Array();
-		 intervalid = 10;
-		 for(var ii=0;ii<localStorage.length;ii++){
-			if(localStorage.key(ii)=="paihang")
-				break;
-		 }
-		 if(ii>=localStorage.length){
-			 shuju[0]={name: name, price:n*10+number};		
-			localStorage.setItem("paihang",JSON.stringify(shuju));
-		 }
-		 else{
-			shuju=JSON.parse(localStorage.getItem("paihang"));
-			s=shuju.length;
-			shuju[s]={name: name, price:n*10+number};		
-			localStorage.setItem("paihang",JSON.stringify(shuju));
-		 }
-		 number=0;
+     if (status == "lost"){
+		 //shuju = new Array();
+    if(localStorage.length==0){
+      localStorage.setItem("fraction",n*10+number);
+    }else {
+      if(localStorage.getItem("fraction")<n*10+number){
+        localStorage.setItem("fraction",n*10+number);
+      }
+    }
+		number=0;
+    alert('You lost!');
 		startLevel(0);
+    console.log(shuju);
 	  }
       else if (n < plans.length - 1)
         startLevel(n + 1);
@@ -397,21 +379,22 @@ function score(){
 
 
 }
-function loadscore(){
-var temp;
-	sj=JSON.parse(localStorage.getItem("paihang"));
-	for(var i=0;i<sj.length;i++){
-		for(var j=0;j<sj.length-1;j++){
-			if(sj[j+1].price>sj[j].price){
-				temp=sj[j];
-				sj[j]=sj[j+1];
-				sj[j+1]=temp;
-				}
-		}
-	}
-
-	for(var q=0;q<10||sj.length;q++){
-	document.getElementById("table-body").rows[q].cells[1].innerHTML=sj[q].name;
-	document.getElementById("table-body").rows[q].cells[2].innerHTML=sj[q].price;
-	}
-}
+// function loadscore(){
+// var temp;
+// 	sj=JSON.parse(localStorage.getItem("paihang"));
+// 	for(var i=0;i<sj.length;i++){
+// 		for(var j=0;j<sj.length-1;j++){
+// 			if(sj[j+1].price>sj[j].price){
+// 				temp=sj[j];
+// 				sj[j]=sj[j+1];
+// 				sj[j+1]=temp;
+// 				}
+// 		}
+// 	}
+//
+// 	for(var q=0;q<10||sj.length;q++){
+// 	document.getElementById("table-body").rows[q].cells[1].innerHTML=sj[q].name;
+// 	document.getElementById("table-body").rows[q].cells[2].innerHTML=sj[q].price;
+//
+// 	}
+// }
